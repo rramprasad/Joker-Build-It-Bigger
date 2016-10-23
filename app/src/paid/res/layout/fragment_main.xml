@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.exinnos.joker.MainActivityFragment">
+    tools:context="com.exinnos.joker.free.MainActivityFragment">
 
     <TextView
         android:id="@+id/instructions_text_view"
@@ -16,21 +16,19 @@
         android:text="@string/instructions" />
 
     <Button
+        android:id="@+id/tell_joke_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions_text_view"
-        android:onClick="tellJoke"
         android:text="@string/button_text"
-
         />
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+    <ProgressBar
+        android:id="@+id/joke_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

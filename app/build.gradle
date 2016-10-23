@@ -19,12 +19,12 @@ android {
         }
     }
 
-    productFlavors{
-        free{
+    productFlavors {
+        free {
             applicationId 'com.exinnos.joker.free'
         }
 
-        paid{
+        paid {
             applicationId 'com.exinnos.joker.paid'
         }
     }
@@ -32,9 +32,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.2.0'
     // Added for AdMob
-    compile 'com.google.android.gms:play-services-ads:9.6.1'
-    compile project(':jokelibrary')
     compile project(':jokedisplaylibrary')
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.google.android.gms:play-services-ads:9.6.1'
+    compile 'com.google.code.findbugs:jsr305:2.0.1'
+    compile project(path: ':jokebackend', configuration: 'android-endpoints')
 }

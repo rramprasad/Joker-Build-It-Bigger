@@ -1,4 +1,4 @@
-package com.exinnos.joker;
+package com.exinnos.joker.free;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +32,7 @@ import java.io.IOException;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends com.exinnos.joker.MainActivityFragment {
 
     private ProgressBar jokeProgressBar;
     private OnMainActivityFragmentListener mListener;
@@ -45,13 +45,31 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        AdView mAdView = (AdView) rootView.findViewById(R.id.adView);
+        // Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("84EC006093534D3A9A6CF2EF868EF470")
+                .build();
+        mAdView.loadAd(adRequest);
+
+        Button tellJokeButton = (Button)rootView.findViewById(R.id.tell_joke_button);
+        tellJokeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FetchJokeAsyncTask().execute();
+            }
+        });
+
         jokeProgressBar = (ProgressBar)rootView.findViewById(R.id.joke_progressbar);
 
         return rootView;
     }
 
 
-    @Override
+    /*@Override
     public void onAttach(Context context) {
         if(context instanceof MainActivity){
             mListener = (OnMainActivityFragmentListener)context;
@@ -59,7 +77,7 @@ public class MainActivityFragment extends Fragment {
         super.onAttach(context);
     }
 
-    public class FetchJokeAsyncTask extends AsyncTask<Void,Void,String> {
+    private class FetchJokeAsyncTask extends AsyncTask<Void,Void,String> {
 
         private JokerApi jokerApi;
 
@@ -78,12 +96,12 @@ public class MainActivityFragment extends Fragment {
                 JokerApi.Builder jokerApiBuilder = new JokerApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null);
                 jokerApiBuilder.setRootUrl(AppConstants.BASE_URL);
                         // Used for local development purpose
-                        /*.setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
+                        *//*.setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
                             public void initialize(AbstractGoogleClientRequest<?> request) throws IOException {
                                 request.setDisableGZipContent(true);
                             }
-                        });*/
+                        });*//*
                 jokerApi = jokerApiBuilder.build();
             }
 
@@ -109,5 +127,5 @@ public class MainActivityFragment extends Fragment {
 
     public interface OnMainActivityFragmentListener{
        void onJokeReceived(String jokeString);
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-package com.exinnos.joker;
+package com.exinnos.joker.paid;
 
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +45,14 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        Button tellJokeButton = (Button)rootView.findViewById(R.id.tell_joke_button);
+        tellJokeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FetchJokeAsyncTask().execute();
+            }
+        });
+
         jokeProgressBar = (ProgressBar)rootView.findViewById(R.id.joke_progressbar);
 
         return rootView;
@@ -59,7 +67,7 @@ public class MainActivityFragment extends Fragment {
         super.onAttach(context);
     }
 
-    public class FetchJokeAsyncTask extends AsyncTask<Void,Void,String> {
+    private class FetchJokeAsyncTask extends AsyncTask<Void,Void,String> {
 
         private JokerApi jokerApi;
 
@@ -108,6 +116,6 @@ public class MainActivityFragment extends Fragment {
     }
 
     public interface OnMainActivityFragmentListener{
-       void onJokeReceived(String jokeString);
+        void onJokeReceived(String jokeString);
     }
 }
