@@ -5,7 +5,7 @@ package com.exinnos.joker;
  */
 public class AppConstants {
 
-    // Local server
+    // App server
     public static String BASE_URL = "https://joker-build-it-bigger.appspot.com/_ah/api/";
 
 

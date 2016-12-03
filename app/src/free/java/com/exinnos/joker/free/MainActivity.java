@@ -1,4 +1,4 @@
-package com.exinnos.joker;
+package com.exinnos.joker.free;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.exinnos.jokedisplaylibrary.JokeDisplayActivity;
-import com.exinnos.joker.free.MainActivityFragment;
 import com.udacity.gradle.builditbigger.R;
 
 
-public class MainActivity extends AppCompatActivity implements MainActivityFragment.OnMainActivityFragmentListener{
+public class MainActivity extends AppCompatActivity implements MainActivityFragment.OnMainActivityFragmentListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +44,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
 
     @Override
     public void onJokeReceived(String jokeString) {
+        launchJokeDisplayActivity(jokeString);
+    }
+
+    private void launchJokeDisplayActivity(String jokeString) {
         // Launch joke using Android library - jokedisplaylibrary
         Intent intent = new Intent(MainActivity.this, JokeDisplayActivity.class);
-        intent.putExtra(JokeDisplayActivity.INTENT_EXTRA_KEY_JOKE,jokeString);
+        intent.putExtra(JokeDisplayActivity.INTENT_EXTRA_KEY_JOKE, jokeString);
         startActivity(intent);
     }
 }
